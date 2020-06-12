@@ -9,6 +9,34 @@ It is compatible with Postgres databases and utilizes the COMMENT's on columns t
 
 The script works by importing the db_dump.sql result from pg_dump and generating db_scrubfu.sql ready for use with pg_import.
 
+### Usage
+
+```
+Usage: pg_scrubfu [OPTIONS] [INFILE] [OUTFILE]
+
+  pg_scrubfu v0.1.0, Copyright(c) 2020, Cyber-Mint (Pty) Ltd
+
+     Distributed under the MIT license.
+
+  pg_crubfu is a script that makes creating usable development data from
+  production data a predictable, audit-able and repeatable process. The
+  script works by scrubbing and /or obsfucating table column data based on
+  script-tags in SQL comments stored in the postgres database.
+
+  [INFILE] is the input file obtained by a pg_dump.
+
+  [OUTFILE] is the scrubfu'ed file, ready to be imported with pg_import.
+
+  For further details see: https://github.com/Cyber-Mint/pg_scrubfu
+
+Options:
+  -h, --help                      Show this message and exit.
+  -v, --version                   Show the version and exit.
+  --log TEXT                      Optional LOGFILE, defaults to standard out.
+  --log_level [error|info|debug]  Used with [--log=LOGFILE].
+  --ref_fk                        Flag: also scrubfu related foreign key data.
+```
+
 ## Approach
 When a DB administrator or developer designs or updates a database schema, they have the opportunity to consciously go through each column in each table and determine if that column contains some sensitive or confidential data such as personally identifiable information or cardholder data etc.
 
