@@ -6,11 +6,11 @@ with open("README.rst") as file:
 
 
 setup(
-    name="py_app_package",
-    version="0.1.9",
-    description="A packaging template application ",
+    name="pg_scrubfu",
+    version="0.1.0",
+    description="PostgreSQL data obfuscation Kung Fu for DBA's and DevOps Masters written in Python",
     long_description=long_description,
-    long_description_content_type="text/x-rst",
+    long_description_content_type="text/x-md",
     classifiers=[
         "Development Status :: 1 - Planning",
         "License :: OSI Approved :: MIT License",
@@ -18,15 +18,15 @@ setup(
         "Operating System :: POSIX :: Linux",
         "Topic :: Software Development",
     ],
-    keywords="python package template",
-    url="https://github.com/Cyber-Mint/py_app_package",
+    keywords="postgres data obfuscation",
+    url="https://github.com/Cyber-Mint/pg_scrubfu",
     author="Bank-Builder",
     author_email="bank-builder@cyber-mint.com",
     license="MIT",
-    packages=["app"],
+    packages=["scrubfu"],
     install_requires=["Faker",],
     include_package_data=True,
-    entry_points={"console_scripts": ["app-cli=app.app_cli:main"],},
+    entry_points={"console_scripts": ["pg_scrubfu=scrubfu.pg_scrubfu:main"],},
     zip_safe=False,
     python_requires=">=3.6",
 )

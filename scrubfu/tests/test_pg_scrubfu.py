@@ -1,11 +1,11 @@
 from unittest import TestCase
-from app.app_cli import main
+from scrubfu.pg_scrubfu import main
 from io import StringIO
 from contextlib import redirect_stdout
 
 
-class Test_app_cli(TestCase):
-    def test_cli(self):
+class Test_pg_scrubfu(TestCase):
+    def test_pg_scrubfu(self):
         f = StringIO()
 
         with redirect_stdout(f):
