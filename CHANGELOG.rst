@@ -6,6 +6,9 @@ pg_scrubfu Change Log
 0.1.0 (2020-06-09)
 ------------------
 * cloned template from py_app_package Initial Commit
+* added README.md with usage instructions
+* CLI help functionality
+* Basic Build
 
 
 ====================================

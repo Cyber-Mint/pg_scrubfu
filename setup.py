@@ -1,7 +1,7 @@
 from setuptools import setup
 
 
-with open("README.rst") as file:
+with open("README.md") as file:
     long_description = file.read()
 
 
@@ -26,7 +26,7 @@ setup(
     packages=["scrubfu"],
     install_requires=["Faker",],
     include_package_data=True,
-    entry_points={"console_scripts": ["pg_scrubfu=scrubfu.pg_scrubfu:main"],},
+    entry_points={"console_scripts": ["pg_scrubfu=scrubfu.pg_scrubfu:cli"],},
     zip_safe=False,
     python_requires=">=3.6",
 )
