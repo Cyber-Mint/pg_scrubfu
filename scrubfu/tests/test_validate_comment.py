@@ -3,7 +3,7 @@ import logging
 import sys
 sys.path.insert(0, '/home/yusuf/pg_scrubfu/scrubfu')
 from validate import validate_comment
-
+ 
 # Set up logging configuration for tests
 root = logging.getLogger()
 root.setLevel(logging.DEBUG)
