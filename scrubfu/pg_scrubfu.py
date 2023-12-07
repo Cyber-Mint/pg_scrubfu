@@ -1,5 +1,6 @@
 import click
 
+
 @click.command()
 @click.help_option('-h', '--help')
 @click.version_option('0.1.0', '-v', '--version', message='%(prog)s v%(version)s')
@@ -8,15 +9,12 @@ import click
 @click.option('--log', default='-', help='Optional LOGFILE, defaults to standard out.')
 @click.option('--log_level', default='error', type=click.Choice(['error', 'info', 'debug']), help='Used with [--log=LOGFILE].')
 @click.option('--ref_fk', is_flag=True, help='Flag: also scrubfu related foreign key data.')
-
-
-
 def cli(log, ref_fk, log_level, infile, outfile):
 	"""
 	pg_scrubfu v0.1.0, Copyright(c) 2020, Cyber-Mint (Pty) Ltd
-	
-	   Distributed under the MIT license.
-	
+
+	Distributed under the MIT license.
+
 	pg_crubfu is a script that makes creating usable development data
 	from production data a predictable, audit-able and repeatable process.
 	The script works by scrubbing and /or obsfucating table column data
@@ -27,10 +25,11 @@ def cli(log, ref_fk, log_level, infile, outfile):
 	
 	"""
 	pass
-	#click.echo('Scrubfu will write to %s' % outfile, file=outfile)
-	#click.echo(infile)
-	#if !ref_fk:
-	#	raise click.BadParameter('Dude - Applying to related fk data is always preferred', param_hint=['--ref_fk'])
+	# click.echo('Scrubfu will write to %s' % outfile, file=outfile)
+	# click.echo(infile)
+	# if not ref_fk:
+	# 	raise click.BadParameter('Dude - Applying to related fk data is always preferred', param_hint=['--ref_fk'])
+
 
 if __name__ == '__main__':
 	cli()
