@@ -52,7 +52,7 @@ For example:
     age int,                        -- we won't scrubfu this field
     mobile_number text,             -- ~RA:+NNN(NNN) NNN-NNNN~ 
     email text,                     -- ~MA:3,2,#,'@','.'~ The secret person's email address
-    description                     -- ~DROP:description~ Description of the record
+    description                     -- ~DROP:~ Description of the record
 );
 ```
 
@@ -82,7 +82,7 @@ Valid tags would be of these types:
 | ``~``REPLACE:``~`` | Replaces non-iteratively using a set of find and replace tuples |  ``~``RE:address,addr;'zone','co.uk' ``~`` |
 | ``~``RANDOM:``~`` | Returns random data | ``~``RA:A3N2``~`` |
 | ``~``LIST:``~`` | Returns data from a supplied list | ``~``LI:firstname.txt``~`` |
-| ``~``DROP:``~`` | Returns no/empty data or completely drops the column | ``~``DR:email``~`` |
+| ``~``DROP:``~`` | Returns no/empty data or completely drops the column | ``~``DR:``~`` |
 
  
 ### MASK script
