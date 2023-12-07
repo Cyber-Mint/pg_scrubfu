@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-import app
+import scrubfu
 
 
 class Test_say_hello(TestCase):
