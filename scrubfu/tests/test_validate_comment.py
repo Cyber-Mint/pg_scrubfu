@@ -4,27 +4,27 @@ import sys
 from scrubfu.validate import validate_comment
  
 # Set up logging configuration for tests
-root = logging.getLogger()
-root.setLevel(logging.DEBUG)
+log = logging.getLogger()
+log.setLevel(logging.DEBUG)
 
 handler = logging.StreamHandler(sys.stdout)
 handler.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
-root.addHandler(handler)
+log.addHandler(handler)
 
 
 class TestValidateComment(unittest.TestCase):
     def setUp(self):
         # Set up logging configuration for tests
-        root = logging.getLogger()
-        root.setLevel(logging.DEBUG)
+        log = logging.getLogger()
+        log.setLevel(logging.DEBUG)
 
         handler = logging.StreamHandler(sys.stdout)
         handler.setLevel(logging.DEBUG)
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         handler.setFormatter(formatter)
-        root.addHandler(handler)
+        log.addHandler(handler)
 
     def tearDown(self):
         # Clean up after tests (if needed)
