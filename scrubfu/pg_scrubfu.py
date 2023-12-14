@@ -34,3 +34,4 @@ def cli(log, ref_fk, log_level, infile, outfile):
 
 if __name__ == '__main__':
 	cli()
+
