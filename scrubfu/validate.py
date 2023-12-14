@@ -94,18 +94,20 @@ def validate_comment(comment):
     log_info("Valid comment")
     return True
 
-# Example Usage:
-comments = [
-    "~MA:3,2,#,'@','.'~",
-    "~MA:invalid,2,#,'@','.'~",  # Invalid first parameter for MASK
-    "~RE:address,addr;'zone','co.uk'~",
-    "~DROP:value1~",  # Valid DROP with 1 parameter
-    "~DROP:value1,value2,value3~",  # Invalid number of parameters for DROP
-    "~RA:+NNN(NNN) NNN-NNNN~",  # Valid RANDOM format
-    "~LI:file.txt,10,SEQ~",  # Valid LIST with 3 parameters
-    "~LI:file.txt,invalid,RND~",  # Invalid second parameter for LIST
-]
+if __name__ == "__main__":
 
-for comment in comments:
-    result = validate_comment(comment)
-    print(f"Comment: {comment}\nValid: {result}\n")
+    # Example Usage:
+    comments = [
+        "~MA:3,2,#,'@','.'~",
+        "~MA:invalid,2,#,'@','.'~",  # Invalid first parameter for MASK
+        "~RE:address,addr;'zone','co.uk'~",
+        "~DROP:value1~",  # Valid DROP with 1 parameter
+        "~DROP:value1,value2,value3~",  # Invalid number of parameters for DROP
+        "~RA:+NNN(NNN) NNN-NNNN~",  # Valid RANDOM format
+        "~LI:file.txt,10,SEQ~",  # Valid LIST with 3 parameters
+        "~LI:file.txt,invalid,RND~",  # Invalid second parameter for LIST
+    ]
+
+    for comment in comments:
+        result = validate_comment(comment)
+        print(f"Comment: {comment}\nValid: {result}\n")
