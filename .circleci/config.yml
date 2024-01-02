@@ -60,7 +60,8 @@ jobs:
           command: |
             python3 -m venv .venv
             . .venv/bin/activate
-            pip install flake8 yamllint
+            pip install flake8
+            pip install yamllint
       - save_cache:
           key: deps1-{{ .Environment.CACHE_VERSION }}
           paths:
@@ -68,36 +69,20 @@ jobs:
       - run:
           name: Lint repo with yamllint
           command: |
+            python3 -m venv .venv
+            . .venv/bin/activate
+            cd ~/repo
             python3 -m yamllint -c .yamllint.conf .
       - run:
           name: Lint BackEnd with flake8
           command: |
             python3 -m venv .venv
             . .venv/bin/activate
-            cd ~/repo/backend/src
+            cd ~/repo/scrubfu
             flake8 . --count --select=E901,E999,F821,F822,F823 --show-source --statistics
             flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-  # publish-pg_scrubfu:
-  #   machine:
-  #     image: ubuntu-2204:2022.07.1
-  #   working_directory: ~/repo
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Build and tag pg_scrubfu image
-  #         command: |
-  #           cd ~/repo/backend
-  #           docker build -t $IMAGE_NAME:$CIRCLE_TAG .
-  #           docker tag $IMAGE_NAME:$CIRCLE_TAG $IMAGE_NAME:latest
-  #     - run:
-  #         name: Publish Docker Image to Docker Hub
-  #         command: |
-  #           echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" \
-  #             --password-stdin
-  #           docker push $IMAGE_NAME:$CIRCLE_TAG
-  #           docker push $IMAGE_NAME:latest
-
+  
 workflows:
   version: 2
   untagged_build_test:
