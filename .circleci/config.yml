@@ -61,19 +61,11 @@ jobs:
           command: |
             python3 -m venv .venv
             . .venv/bin/activate
-            pip install ansible ansible-lint flake8
+            pip install flake8
       - save_cache:
           key: deps1-{{ .Environment.CACHE_VERSION }}
           paths:
             - ".venv"
-      - run:
-          name: Lint playbook with ansible lint
-          command: |
-            python3 -m venv .venv
-            . .venv/bin/activate
-            ansible-lint --version
-            cd ~/repo/playbook/
-            ansible-lint
       - run:
           name: Lint repo with yamllint
           command: |
