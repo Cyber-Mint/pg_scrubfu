@@ -94,7 +94,7 @@ Every Scrubfu tag has an associated action, but may also include options that ma
 Scrubfu tags typically consist of three main sections, namely the **```action name```**, the **```field content location```** and the **```action options```**. 
 The **```action name```** is required (for obvious reasons), but both the **```field content location```** and **```action options```** may be optional depending on the action type.
 
-![Scrubfu-Tag Syntax Diagram](images/Scrubfu-Tag-Syntax-Diagram.jpg?token=ACUT54QFWBXF4XH4STONEJ25HG37Y "Scrubfu Tag Syntax Diagram")
+![Scrubfu-Tag Syntax Diagram](images/scrubfu-tag-syntax-diagram.jpg)
 
 * The tag action must be specified before the first ":".  
 
@@ -190,7 +190,7 @@ An example usage of *scrubfu* maybe:
 ```bash
 PGPASSWORD=pgpass pg_dump -h localhost -p 15432 -U postgres --file /tmp/scrubfu_sample.sql scrubfu_sample
 
-docker run --rm -v /tmp:/tmp -i grindrodbank/scrubfu /tmp/scrubfu_sample.sql /tmp/scrubfu_sample_scrubbed.sql
+docker run --rm -v /tmp:/tmp -i ~/scrubfu /tmp/scrubfu_sample.sql /tmp/scrubfu_sample_scrubbed.sql
 ```
 
 ### Docker
@@ -198,8 +198,8 @@ docker run --rm -v /tmp:/tmp -i grindrodbank/scrubfu /tmp/scrubfu_sample.sql /tm
 This will build the latest version from source and run a pre-configured demo using the supplied docker-compose.yml file.
 
 ```bash
-docker build -t grindrodbank/scrubfu .
-docker pull grindrodbank/scrubfu
+docker build -t ~/scrubfu .
+docker pull ~/scrubfu
 docker-compose up
 docker ps -a
 ```
@@ -207,7 +207,7 @@ docker ps -a
 The container may also be pulled from Grindrod Bank's docker hub repository.
 
 ```bash
-docker pull grindrodbank/scrubfu
+docker pull ~/scrubfu
 ```
 
 ---
