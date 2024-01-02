@@ -51,7 +51,7 @@ For example:
     surname text,                   -- ~LI:surnames.txt, 30, RND~
     age int,                        -- we won't scrubfu this field
     mobile_number text,             -- ~RA:+NNN(NNN) NNN-NNNN~ 
-    email text,                     -- ~MA:EMAIL~ The secret person's email address
+    email text,                     -- ~MA:3,2,#,'@','.'~ The secret person's email address
     description                     -- ~DROP:~ Description of the record
 );
 ```
