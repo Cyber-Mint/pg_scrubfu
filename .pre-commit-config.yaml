@@ -1,0 +1,13 @@
+repos:
+  - repo: local
+    hooks:
+      - id: gitleaks
+        name: gitleaks
+        entry: ./scripts/gitleaks
+        language: script
+  - repo: local
+    hooks:
+      - id: flake8
+        name: Flake 8 Linting
+        entry: ./scripts/flaker
+        language: script
