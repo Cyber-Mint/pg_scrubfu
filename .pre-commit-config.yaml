@@ -11,3 +11,9 @@ repos:
         name: Flake 8 Linting
         entry: ./scripts/flaker
         language: script
+  - repo: local
+    hooks:
+      - id: yamllint
+        name: Yaml Linting
+        entry: ./scripts/ymling
+        language: script     
