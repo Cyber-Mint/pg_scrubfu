@@ -53,7 +53,6 @@ jobs:
           command: |
             export DEBIAN_FRONTEND='noninteractive'
             apt-get update
-            apt-get install -y yamllint
       - restore_cache:
           key: deps1-{{ .Environment.CACHE_VERSION }}
       - run:
@@ -61,7 +60,7 @@ jobs:
           command: |
             python3 -m venv .venv
             . .venv/bin/activate
-            pip install flake8
+            pip install flake8 yamllint
       - save_cache:
           key: deps1-{{ .Environment.CACHE_VERSION }}
           paths:
@@ -69,7 +68,7 @@ jobs:
       - run:
           name: Lint repo with yamllint
           command: |
-            yamllint -c .yamllint.conf .
+            python3 -m yamllint -c .yamllint.conf .
       - run:
           name: Lint BackEnd with flake8
           command: |
