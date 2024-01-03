@@ -68,11 +68,11 @@ This may result in data of the form:
 | ----- |:------------- |:------------- | ---- | --------------- | ----------------------------- |
 | 45 | Adalie | Gadzinksi | 22 | +256(012) 555-8789 | #####@####.##.### |
 | 46 | Adalina | Zanders | 35 | +001(211) 555-1526 | ##@#####.#### |
-| 47 | Adalind | O'Hare| 19 | +23(24) 555-8756 | ####.####@####.##.## |
+| 47 | Adalind | O'Hare| 19 | +235(240) 555-8756 | ####.####@####.##.## |
 etc...
 
 ## Script-Tags
-*pg_Scrubfu* script-tags should appear at the beginning of the column comment field and be enclosed in an opening and closing ~.  Scrubfu scripts may contain escaped "\" characters if required.  Scrubfu script tags may be abbreviated to be the first two characters of the script required, for example: ~REPLACE could be abbreviated as ~RE. The script parameters follow the script-tag after a ":".  Field types are maintained or the scrubfu script is not executed.  Scrubfu scripts treat the data obfuscation as if operating on TEXT but data types are honored e.g. if the script resulted in a series of numbers NNNNN but the field type was text rather than numeric then "NNNNN" would be used. It is possible to have multiple scrubfu scripts per comment field, and they will be executed left to right iteratively.
+*pg_Scrubfu* script-tags should appear at the beginning of the column comment field and be enclosed in an opening and closing ~.  Scrubfu scripts may contain escaped "\" characters if required.  Scrubfu script tags may be abbreviated to be the first two characters of the script required, for example: ~REPLACE could be abbreviated as ~RE. The script parameters follow the script-tag after a colon (:). Scrubfu scripts treat the data obfuscation as if operating on TEXT but data types are honored e.g. if the script resulted in a series of numbers NNNNN but the field type was text rather than numeric then "NNNNN" would be used. It is possible to have multiple scrubfu scripts per comment field, and they will be executed left to right iteratively.
 
 Valid tags would be of these types:
 
@@ -80,7 +80,7 @@ Valid tags would be of these types:
 | ----- | ----- | ----- |
 | ``~``MASK:``~`` | Masks the field | ``~``MA:3,2;#;'@','.'``~`` |
 | ``~``REPLACE:``~`` | Replaces non-iteratively using a set of find and replace tuples |  ``~``RE:address,addr;'zone','co.uk' ``~`` |
-| ``~``RANDOM:``~`` | Returns random data | ``~``RA:A3N2``~`` |
+| ``~``RANDOM:``~`` | Returns random data for N,A,a | ``~``RA:A3N2``~`` |
 | ``~``LIST:``~`` | Returns data from a supplied list | ``~``LI:firstname.txt``~`` |
 | ``~``DROP:``~`` | Returns no/empty data or completely drops the column | ``~``DR:``~`` |
 
