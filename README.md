@@ -88,6 +88,8 @@ Valid tags would be of these types:
 ### MASK script
  > ```~MASK: start, end, mask character, 'ignored','characters',<>,<>~```
 
+![MASK](https://github.com/Cyber-Mint/pg_scrubfu/assets/102973452/9afd4fc0-dd20-4d59-95fb-986738298129)
+
 **Usage:**
  - The MASK script starts at the **start** position in the field, and ends **end** characters from the end of the field.
  - The **mask character** is the applied mask for each character in the field.
