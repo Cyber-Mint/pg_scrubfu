@@ -88,12 +88,16 @@ Valid tags would be of these types:
 ### MASK script
  > ```~MASK: start, end, mask character, 'ignored','characters',<>,<>~```
 
-![MASK2](https://github.com/Cyber-Mint/pg_scrubfu/assets/102973452/e57ce475-42d2-4d16-af66-abb6563d594d)
+**Information:**
+- The MASK script tag should have a minimum of 3 parameters, the first 2 parameters should be digits or numbers.
 
 **Usage:**
- - The MASK script starts at the **start** position in the field, and ends **end** characters from the end of the field.
+ - The MASK script starts with a digit / number, which determines at what position the masking should start.
+ - The **end** or second position (must be a digit / number) determines how many digits that are not masked from the back of the value.
  - The **mask character** is the applied mask for each character in the field.
- - The **'ignored','characters'** are a comma separated string of quoted characters which will be ignored during the masking. 
+ - The **'ignored','characters'** are a comma separated string of quoted characters which will be ignored during the masking.
+
+![MASK2](https://github.com/Cyber-Mint/pg_scrubfu/assets/102973452/e57ce475-42d2-4d16-af66-abb6563d594d) 
 
 **Example:** Mask an email address by leaving two characters on each end, while masking the rest of the email address with # but ignoring '@' and '.' characters.
 <pre>
