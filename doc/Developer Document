@@ -64,10 +64,7 @@ Contributing
 13.1 Code Contributions
 13.2 Bug Reports
 13.3 Feature Requests
-License
 
-14.1 License Information
-14.2 Open Source Contributions
 1. Introduction
 1.1 Overview
 pg_scrubfu is a database management software designed specifically for [provide a brief description of the purpose of the application].
@@ -192,6 +189,3 @@ Report bugs using the process outlined in [Bug Reporting Guidelines].
 13.3 Feature Requests
 Suggest and discuss new features by following the [Feature Request Process].
 
-14. License
-14.1 License Information
-Review the licensing information in [License].
