@@ -84,104 +84,6 @@ Valid tags would be of these types:
 | ``~``LIST:``~`` | Returns data from a supplied list | ``~``LI:firstname.txt``~`` |
 | ``~``DROP:``~`` | Returns no/empty data or completely drops the column | ``~``DR:``~`` |
 
-
- 
-### MASK script
- > ```~MASK: start, end, mask character, 'ignored','characters',<>,<>~```
-
-**Information:**
-- The MASK script tag should have a minimum of 3 parameters, the first 2 parameters should be digits or numbers. After every parameter there should be a comma.
-
-**Usage:**
- - The MASK script starts with a digit / number, which determines at what position the masking should start.
- - The **end** or second position (must be a digit / number) determines how many digits that are not masked from the back of the value.
- - The **mask character** is the applied mask for each character in the field.
- - The **'ignored','characters'** are a comma separated string of quoted characters which will be ignored during the masking.
-
-![MASK2](https://github.com/Cyber-Mint/pg_scrubfu/assets/102973452/e57ce475-42d2-4d16-af66-abb6563d594d) 
-
-**Example:** Mask an email address by leaving two characters on each end, while masking the rest of the email address with # but ignoring '@' and '.' characters.
-<pre>
-~MA:3,2,#,'@','.'~
-email.address@domain.zone becomes ema##.#######@######.##ne
-</pre>
-
-
-### REPLACE script
-> ```~RE:find,replace;<>,<>~```
-
-**Information:**
-- The REPLACE script tag should have a minimum of 2 parameters, the first parameter is what needs to be replaced, and the second parameter is the value that will replace the first. After every even parameter there should be a comma. Values have to be found and replaced in pairs, so the requirement is to have an even number of parameters, with a semi colon (;) after every even number.
-  
-**Usage:**
-The REPLACE script will non-iteratively find and replace each of the tuples provided with the ``~``RE: tag.
-The find & replace strings may be 'quoted' for clarity (optional).
-
-![Replace](https://github.com/Cyber-Mint/pg_scrubfu/assets/102973452/ef04c0a7-9734-44cf-8131-4f6b60970df2)
-
-**Example:** Replace 'com' with 'co.za' in a web address.
-<pre>
-~RE:'com','co.za'~
-www.example.com becomes www.example.co.za
-</pre>
-
-
-### RANDOM script
-> ```~RA:<format>~```
-
-**Information:**
-- The RANDOM script can only have 1 parameter.
-  
-**Usage:**
-Random generates a random value of the given type and formats it according to the provided format.
-Random types include:
- - N - Numeric
- - A - Capital alpha characters
- - a - Lowercase alpha characters
-
-**Example:** 
-The Random script below s an example of using Numeric's to create a valid but random telephone style number.
- 
-```
-~RA:+NNN(NNN) NNN-NNNN~
-This would for example yield +612(342) 555-9786
-```
-
-
-### LIST script
-> ```~LI:list-name,truncation,SEQ|RND~```
-
-**Usage:**
-List selects from a provided list file called list-name (one entry per line), either sequentially (SEQ) or randomly (RND) and replaces the field with that entry truncated to the truncation length (for example 20).
-
-![List](https://github.com/Cyber-Mint/pg_scrubfu/assets/102973452/2c9b7364-74f2-4981-88f8-f6dda2b47a4b)
-
-**Example:** 
-<pre>
-~LI:firstnames.txt,20,RND~
-The field value is changed to a random TRUNC(firstname,20) from the supplied firstnames.txt file.
-</pre>
-
-### DROP script
-> ```~DR~```
-
-**Usage:**
-Drop script drops the the column.
-
-### Alias's
-Alias's are added after the ":" delimiter instead of the script as follows ``~``MASK:EMAIL``~``
-Where EMAIL would a pre-configured alias being EMAIL=2,#,@
-Other alias's could conceivably be CARD=4,#
-Alias's are kept in the *scrubfu.alias* file one per line.
-
-
-## Referential Integrity Maintained
-If the --ref-integrity command line parameter is set to "true" and a tagged field is referenced in a foreign_key then *scrubfu* follows the foreign_key back and replaces the matching foreign_key in the reference column with the *scrubfu* data by applyting the same script there.
-
-## Errors
-Errors are recorded into the default *scrubfu.log* if the *--log_level=* command line parameter is present.  Valid values are: info, error, debug.  The log file name may be changed using the *--log_file=* parameter.
-
-
 ## Implementation
 *pg_scrubfu* is implemented using Python3 as a command line application and may easily be run in a docker container as part of any build pipeline.
 
@@ -215,10 +117,6 @@ pg_scrubfu -h
 
 deactivate
 ```
-
-### Tests
-> Future feature
-
 
 ## Project Documentation
 
