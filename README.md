@@ -80,16 +80,17 @@ Valid tags would be of these types:
 | ----- | ----- | ----- |
 | ``~``MASK:``~`` | Masks the field | ``~``MA:3,2;#;'@','.'``~`` |
 | ``~``REPLACE:``~`` | Replaces non-iteratively using a set of find and replace tuples |  ``~``RE:address,addr;'zone','co.uk' ``~`` |
-| ``~``RANDOM:``~`` | Returns random data for N,A,a | ``~``RA:A3N2``~`` |
+| ``~``RANDOM:``~`` | Returns random data for N,A,a | ``~``RA:AANa``~`` |
 | ``~``LIST:``~`` | Returns data from a supplied list | ``~``LI:firstname.txt``~`` |
 | ``~``DROP:``~`` | Returns no/empty data or completely drops the column | ``~``DR:``~`` |
+
 
  
 ### MASK script
  > ```~MASK: start, end, mask character, 'ignored','characters',<>,<>~```
 
 **Information:**
-- The MASK script tag should have a minimum of 3 parameters, the first 2 parameters should be digits or numbers.
+- The MASK script tag should have a minimum of 3 parameters, the first 2 parameters should be digits or numbers. After every parameter there should be a comma.
 
 **Usage:**
  - The MASK script starts with a digit / number, which determines at what position the masking should start.
@@ -105,12 +106,25 @@ Valid tags would be of these types:
 email.address@domain.zone becomes ema##.#######@######.##ne
 </pre>
 
+
 ### REPLACE script
 > ```~RE:find,replace;<>,<>~```
 
+**Information:**
+- The REPLACE script tag should have a minimum of 2 parameters, the first parameter is what needs to be replaced, and the second parameter is the value that will replace the first. After every even parameter there should be a comma. Values have to be found and replaced in pairs, so the requirement is to have an even number of parameters, with a semi colon (;) after every even number.
+  
 **Usage:**
 The REPLACE script will non-iteratively find and replace each of the tuples provided with the ``~``RE: tag.
-The find & replace strings may be 'quoted' for clarity (optional) and escape `\,` characters may be used to include a comma or a single-quotes in the find/replace string. 
+The find & replace strings may be 'quoted' for clarity (optional).
+
+![Replace](https://github.com/Cyber-Mint/pg_scrubfu/assets/102973452/ef04c0a7-9734-44cf-8131-4f6b60970df2)
+
+**Example:** Replace 'com' with 'co.za' in a web address.
+<pre>
+~RE:'com','co.za'~
+www.example.com becomes www.example.co.za
+</pre>
+
 
 ### RANDOM script
 > ```~RA:<format>~```
