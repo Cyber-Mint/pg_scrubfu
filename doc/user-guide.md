@@ -119,96 +119,137 @@ The **```action name```** is required (for obvious reasons), but both the **```f
 | RANDOM | RA | Returns random data. | ``~RA:AAAANN~`` |
 | FUZZ | FZ | Returns pseudo-random data. | ``~FZ~`` |
 
-### MASK action
-
+ 
+### MASK script
  > ```~MASK: start, end, mask character, 'ignored','characters',<>,<>~```
 
-**Usage:**
+**Information:**
+- The MASK script tag should have a minimum of 3 parameters, the first 2 parameters should be digits or numbers. After every parameter there should be a comma.
 
-* The MASK action starts at the **start** position in the field, and ends **end** characters from the end of the field.
-* The **mask character** is the applied mask for each character in the field.
-* The **'ignored','characters'** are a comma separated string of quoted characters which will be ignored during the masking. 
+**Usage:**
+ - The MASK script starts with a digit / number, which determines at what position the masking should start.
+ - The **end** or second position (must be a digit / number) determines how many digits that are not masked from the back of the value.
+ - The **mask character** is the applied mask for each character in the field.
+ - The **'ignored','characters'** are a comma separated string of quoted characters which will be ignored during the masking.
+
+![MASK2](https://github.com/Cyber-Mint/pg_scrubfu/assets/102973452/e57ce475-42d2-4d16-af66-abb6563d594d) 
 
 **Example:** Mask an email address by leaving two characters on each end, while masking the rest of the email address with # but ignoring '@' and '.' characters.
-
-```sql
+<pre>
 ~MA:3,2,#,'@','.'~
 email.address@domain.zone becomes ema##.#######@######.##ne
-```
+</pre>
 
-### REPLACE action
 
+### REPLACE script
 > ```~RE:find,replace;<>,<>~```
 
+**Information:**
+- The REPLACE script tag should have a minimum of 2 parameters, the first parameter is what needs to be replaced, and the second parameter is the value that will replace the first. After every even parameter there should be a comma. Values have to be found and replaced in pairs, so the requirement is to have an even number of parameters, with a semi colon (;) after every even number.
+  
 **Usage:**
-The REPLACE action will non-iteratively find and replace each of the tuples provided with the ``~``RE: tag.
-The find & replace strings may be 'quoted' for clarity (optional) and escape `\,` characters may be used to include a comma or a single-quotes in the find/replace string. 
+The REPLACE script will non-iteratively find and replace each of the tuples provided with the ``~``RE: tag.
+The find & replace strings may be 'quoted' for clarity (optional).
 
-### RANDOM action
+![Replace](https://github.com/Cyber-Mint/pg_scrubfu/assets/102973452/ef04c0a7-9734-44cf-8131-4f6b60970df2)
 
+**Example:** Replace 'com' with 'co.za' in a web address.
+<pre>
+~RE:'com','co.za'~
+www.example.com becomes www.example.co.za
+</pre>
+
+
+### RANDOM script
 > ```~RA:<format>~```
 
+**Information:**
+- The RANDOM script can only have 1 parameter.
+  
 **Usage:**
 Random generates a random value of the given type and formats it according to the provided format.
 Random types include:
-
-* N - Numeric
-* A - Capital alpha characters
-* a - Lowercase alpha characters
+ - N - Numeric
+ - A - Capital alpha characters
+ - a - Lowercase alpha characters
 
 **Example:** 
-The Random action below s an example of using Numeric's to create a valid but random telephone style number.
+The Random script below s an example of using Numeric's to create a valid but random telephone style number.
  
-```sql
+```
 ~RA:+NNN(NNN) NNN-NNNN~
-This would for example yield +612 (342) 555-9786
+This would for example yield +612(342) 555-9786
 ```
 
-### FUZZ action
 
-> ```~FZ~```
+### LIST script
+> ```~LI:list-name,truncation,SEQ|RND~```
 
 **Usage:**
-Fuzz replaces all lowercase alphas with random lowercase alphas, replaces all uppercase alphas with random uppercase alphas, replaces all digits with random digits while keeping all other punctuation and spaces as it is.
+List selects from a provided list file called list-name (one entry per line), either sequentially (SEQ) or randomly (RND) and replaces the field with that entry truncated to the truncation length (for example 20).
+
+![List](https://github.com/Cyber-Mint/pg_scrubfu/assets/102973452/2c9b7364-74f2-4981-88f8-f6dda2b47a4b)
 
 **Example:** 
+<pre>
+~LI:firstnames.txt,20,RND~
+The field value is changed to a random TRUNC(firstname,20) from the supplied firstnames.txt file.
+</pre>
 
-`~FZ~`
+### DROP script
+> ```~DR~```
+
+**Usage:**
+Drop script drops the the column.
+
+### Alias's
+Alias's are added after the ":" delimiter instead of the script as follows ``~``MASK:EMAIL``~``
+Where EMAIL would a pre-configured alias being EMAIL=2,#,@
+Other alias's could conceivably be CARD=4,#
+Alias's are kept in the *scrubfu.alias* file one per line.
+
+
+## Referential Integrity Maintained
+If the --ref-integrity command line parameter is set to "true" and a tagged field is referenced in a foreign_key then *scrubfu* follows the foreign_key back and replaces the matching foreign_key in the reference column with the *scrubfu* data by applyting the same script there.
 
 ## Errors
+Errors are recorded into the default *scrubfu.log* if the *--log_level=* command line parameter is present.  Valid values are: info, error, debug.  The log file name may be changed using the *--log_file=* parameter.
 
-Errors are recorded into the default *scrubfu.log* if the *--log_level=* command line parameter is present.  Valid values are: info, error, debug.  The log file name may be changed using the *--log=* parameter.
 
 ## Implementation
-
-*scrubfu* is implemented using C# .NET Core command line application and may easily be run in a docker container as part of any build pipeline.
+*pg_scrubfu* is implemented using Python3 as a command line application and may easily be run in a docker container as part of any build pipeline.
 
 ### Usage
-
-An example usage of *scrubfu* maybe:
+An example usage of *pg_scrubfu* maybe:
 
 ```bash
-PGPASSWORD=pgpass pg_dump -h localhost -p 15432 -U postgres --file /tmp/scrubfu_sample.sql scrubfu_sample
-
-docker run --rm -v /tmp:/tmp -i ~/scrubfu /tmp/scrubfu_sample.sql /tmp/scrubfu_sample_scrubbed.sql
+PG_PASSWORD=postgres pg_dump --dbname=<prod_db> -w -u postgres --host=127.0.0.1 --port=5432 --file=pg_dump.sql
+pg_scrubfu pg_dump.sql scrubfu_db.sql  --ref-fk --log-level=info -log=-
+pg_import -C -d postgres scrubfu_db.sql
 ```
 
 ### Docker
-
 This will build the latest version from source and run a pre-configured demo using the supplied docker-compose.yml file.
 
 ```bash
-docker build -t ~/scrubfu .
-docker pull ~/scrubfu
+cd ./docker
+docker build -t pg_scrubfu:latest .
+# docker pull cyber-mint/pg_scrubfu
 docker-compose up
 docker ps -a
 ```
 
-The container may also be pulled from Grindrod Bank's docker hub repository.
+### Python3 Environment Tips
+```
+python3 -m venv pg_scrubfu
+source pg_scrubfu/bin/activate
+pip3 install --editable .
 
-```bash
-docker pull ~/scrubfu
+pg_scrubfu -h
+
+deactivate
 ```
 
 ---
-&copy; Copyright 2019, Grindrod Bank Limited, and distributed under the MIT License.
+&copy; Copyright 2020, Cyber-Mint (Pty) Ltd, and distributed under the MIT License.
+
