@@ -129,6 +129,9 @@ www.example.com becomes www.example.co.za
 ### RANDOM script
 > ```~RA:<format>~```
 
+**Information:**
+- The RANDOM script can only have 1 parameter.
+  
 **Usage:**
 Random generates a random value of the given type and formats it according to the provided format.
 Random types include:
@@ -149,14 +152,21 @@ This would for example yield +612(342) 555-9786
 > ```~LI:list-name,truncation,SEQ|RND~```
 
 **Usage:**
-List selects from a provided list file called list-name (one entry per line), either sequentially (SEQ) or randomly (RND) and replaces the field with that entry truncated to the truncation length (for example 21).
+List selects from a provided list file called list-name (one entry per line), either sequentially (SEQ) or randomly (RND) and replaces the field with that entry truncated to the truncation length (for example 20).
+
+![List](https://github.com/Cyber-Mint/pg_scrubfu/assets/102973452/2c9b7364-74f2-4981-88f8-f6dda2b47a4b)
 
 **Example:** 
-
 <pre>
 ~LI:firstnames.txt,20,RND~
-the field value is changed to a random TRUNC(firstname,20) from the supplied firstnames.txt file.
+The field value is changed to a random TRUNC(firstname,20) from the supplied firstnames.txt file.
 </pre>
+
+### DROP script
+> ```~DR~```
+
+**Usage:**
+Drop script drops the the column.
 
 ### Alias's
 Alias's are added after the ":" delimiter instead of the script as follows ``~``MASK:EMAIL``~``
