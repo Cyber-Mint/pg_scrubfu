@@ -1,3 +1,3 @@
 ==============
-pg_scrubfu
+py_app_package
 ==============
