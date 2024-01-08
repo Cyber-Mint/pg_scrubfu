@@ -4,20 +4,43 @@ pg_scrubfu Developer Documentation
 Table of Contents
 -----------------
 
-1. Contributing
-   * Types of Contributions
-   * Getting Started
-   * Pull Request Guidelines
-   * Publishing
-   * Publish to PyPi
-   * Testing Installation
+Contributing
+---------
 
-2. Developer's Guide
-   * Installation Tips
-   * Installation
-   * Unit Tests
+Types of Contributions
+~~~~~~~~~~~~~
 
-3. Copyright
+Getting Started
+~~~~~~~~~~~~~
+
+Pull Request Guidelines
+~~~~~~~~~~~~~
+
+Publishing
+~~~~~~~~~~~~~
+
+Publish to PyPi
+~~~~~~~~~~~~~
+
+Testing Installation
+~~~~~~~~~~~~~
+
+
+Developer's Guide
+---------
+
+Installation Tips
+~~~~~~~~~~~~~
+
+Installation
+~~~~~~~~~~~~~
+
+Unit Tests
+~~~~~~~~~~~~~
+
+Copyright
+---------
+
 
 Contributing
 =============
