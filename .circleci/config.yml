@@ -32,7 +32,7 @@ jobs:
 
   git-leaks:
     machine:
-      image: ubuntu-2204:current
+      image: ubuntu-2204:2022.07.1
     working_directory: ~/repo
     steps:
       - checkout
